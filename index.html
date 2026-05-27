@@ -4,95 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vrei să ieșim?</title>
-
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #ffe4e1;
-            overflow: hidden;
-        }
-
-        .container {
-            text-align: center;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            position: relative;
-            min-width: 350px;
-        }
-
-        h1 {
-            color: #d63384;
-            margin-bottom: 30px;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        button {
-            padding: 12px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            border-radius: 10px;
-            transition: transform 0.2s;
-        }
-
-        button:hover {
-            transform: scale(1.05);
-        }
-
-        #yes-btn {
-            background-color: #4caf50;
-            color: white;
-        }
-
-        #no-btn {
-            background-color: #f44336;
-            color: white;
-            position: absolute;
-        }
-
-        #date-panel {
-            display: none;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #ffe4e1;
-        }
-
-        input[type="date"] {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #d63384;
-            outline: none;
-            font-size: 16px;
-        }
-
-        #confirm-btn {
-            margin-top: 15px;
-            background-color: #d63384;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container" id="main-container">
-
-    <h1 id="question">
-        Vrei să ieșim la o cafea/suc? 😊
-    </h1>
+    <h1 id="question">Vrei să ieșim la o cafea/suc? 😊</h1>
 
     <div class="buttons" id="btn-group">
         <button id="yes-btn">DA</button>
@@ -101,116 +18,13 @@
 
     <div id="date-panel">
         <h3>Super! Alege o zi ❤️</h3>
-
         <input type="date" id="calendar">
-
         <br>
-
-        <button id="confirm-btn">
-            Confirmă
-        </button>
+        <button id="confirm-btn">Confirmă</button>
     </div>
-
 </div>
 
-<!-- FIREBASE -->
-<script type="module">
-
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-    import {
-        getFirestore,
-        collection,
-        addDoc
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    // CONFIGURAȚIA TA FIREBASE
-    // ÎNLOCUIEȘTE CU DATELE TALE
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyA3hqWpgefpdRtZB8KHkp5tn7Rzfkd_Rs0",
-        authDomain: "web-app-9bf25.firebaseapp.com",
-        projectId: "web-app-9bf25",
-        storageBucket: "web-app-9bf25.firebasestorage.app",
-        messagingSenderId: "540799336022",
-        appId: "1:540799336022:web:8f5040417a82d1009245f7",
-        measurementId: "G-KR8WWTLGG7"
-    };
-    // INITIALIZARE FIREBASE
-    const app = initializeApp(firebaseConfig);
-
-    // INITIALIZARE FIRESTORE
-    const db = getFirestore(app);
-
-    // ELEMENTE
-    const noBtn = document.getElementById('no-btn');
-    const yesBtn = document.getElementById('yes-btn');
-    const confirmBtn = document.getElementById('confirm-btn');
-
-    const btnGroup = document.getElementById('btn-group');
-    const datePanel = document.getElementById('date-panel');
-    const mainTitle = document.getElementById('question');
-
-    // BUTONUL NU FUGE
-    noBtn.addEventListener('mouseover', () => {
-
-        const maxX = window.innerWidth - noBtn.offsetWidth;
-        const maxY = window.innerHeight - noBtn.offsetHeight;
-
-        const randomX = Math.floor(Math.random() * maxX);
-        const randomY = Math.floor(Math.random() * maxY);
-
-        noBtn.style.left = randomX + 'px';
-        noBtn.style.top = randomY + 'px';
-    });
-
-    // APĂSARE DA
-    yesBtn.addEventListener('click', () => {
-
-        mainTitle.innerText = "Mă bucur mult ❤️";
-
-        btnGroup.style.display = 'none';
-
-        datePanel.style.display = 'block';
-    });
-
-    // CONFIRMARE DATĂ
-    confirmBtn.addEventListener('click', async () => {
-
-        const selectedDate =
-            document.getElementById('calendar').value;
-
-        if (!selectedDate) {
-            alert("Te rog alege o dată.");
-            return;
-        }
-
-        try {
-
-            // SALVARE ÎN FIREBASE
-            await addDoc(collection(db, "dates"), {
-
-                selectedDate: selectedDate,
-
-                createdAt: new Date()
-
-            });
-
-            alert(
-                "Perfect! Ne vedem pe " +
-                selectedDate +
-                " ❤️"
-            );
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert("Eroare la salvare în Firebase.");
-        }
-    });
-
-</script>
+<script type="module" src="script.js"></script>
 
 </body>
 </html>

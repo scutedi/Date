@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #ffe4e1; /* Roz pal */
+    background-color: #ffe4e1;
     overflow: hidden;
 }
 
@@ -17,7 +17,6 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     position: relative;
     min-width: 350px;
-    transition: all 0.5s ease;
 }
 
 h1 {
@@ -25,10 +24,14 @@ h1 {
     margin-bottom: 30px;
 }
 
+/* Aliniere butoane unul lângă altul */
 .buttons {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     gap: 20px;
+    align-items: center;
+    min-height: 50px;
 }
 
 button {
@@ -38,7 +41,11 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 10px;
-    transition: transform 0.2s;
+    transition: transform 0.1s;
+}
+
+button:hover {
+    transform: scale(1.05);
 }
 
 #yes-btn {
@@ -49,16 +56,14 @@ button {
 #no-btn {
     background-color: #f44336;
     color: white;
-    position: absolute; /* Necesar pentru a se mișca liber */
-}
-
-.hidden {
-    display: none;
+    /* Adăugăm o tranziție rapidă pentru o mișcare mai fluidă când fuge */
+    transition: left 0.1s ease, top 0.1s ease;
 }
 
 #date-panel {
+    display: none;
     margin-top: 20px;
-    padding: 20px;
+    padding-top: 20px;
     border-top: 2px solid #ffe4e1;
 }
 
@@ -67,9 +72,11 @@ input[type="date"] {
     border-radius: 5px;
     border: 1px solid #d63384;
     outline: none;
+    font-size: 16px;
 }
 
-.confirm-btn {
+#confirm-btn {
+    margin-top: 15px;
     background-color: #d63384;
     color: white;
 }
