@@ -15,7 +15,7 @@ body {
 body::before {
     content: "🌸";
     position: absolute;
-    font-size: 140px;
+    font-size: 100px;
     opacity: 0.15;
     top: -20px;
     left: -20px;
@@ -65,8 +65,8 @@ body::after {
     box-shadow: 0 15px 40px rgba(214, 51, 132, 0.08);
 
     /* MODIFICĂRILE PENTRU SPAȚIU MAI MARE: */
-    width: 900px;         /* Am mărit lățimea de la 420px la 500px */
-    min-height: 450px;    /* Îi dăm o înălțime minimă ca să nu mai fie strâns */
+    width: 550px;         /* Am mărit lățimea de la 420px la 500px */
+    min-height: 300px;    /* Îi dăm o înălțime minimă ca să nu mai fie strâns */
     padding: 50px 45px;   /* Spațiu interior mai mare (sus-jos / stânga-dreapta) */
 
     max-width: 95%;
@@ -79,12 +79,12 @@ body::after {
 h1 {
     color: #d63384;
     margin-bottom: 30px;
-    font-size: 45px; /* Un pic mai mare ca să se potrivească cu noul container */
+    font-size: 28px; /* Un pic mai mare ca să se potrivească cu noul container */
 }
 
 /* --- SISTEM STELUȚE --- */
 .stars {
-    font-size: 70px;
+    font-size: 40px;
     cursor: pointer;
     margin-bottom: 30px;
     display: flex;
@@ -118,7 +118,7 @@ h1 {
 
 button {
     padding: 14px 32px;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
     border: none;
