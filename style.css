@@ -1,3 +1,4 @@
+/* --- FUNDAL ȘI ELEMENTE FLORALE VINTAGE/ROMANTIC --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
@@ -7,24 +8,105 @@ body {
     margin: 0;
     background-color: #ffe4e1;
     overflow: hidden;
+    position: relative;
 }
 
+/* Flori mari în colțurile ecranului */
+body::before {
+    content: "🌸";
+    position: absolute;
+    font-size: 140px;
+    opacity: 0.15;
+    top: -20px;
+    left: -20px;
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+body::after {
+    content: "🌸";
+    position: absolute;
+    font-size: 160px;
+    opacity: 0.12;
+    bottom: -30px;
+    right: -30px;
+    transform: rotate(25deg);
+    pointer-events: none;
+}
+
+/* Flori mai mici pe lângă container */
+.container::before {
+    content: "✨ 🌸";
+    position: absolute;
+    font-size: 50px;
+    opacity: 0.2;
+    top: -80px;
+    right: -60px;
+    pointer-events: none;
+}
+
+.container::after {
+    content: "🌸 ✨";
+    position: absolute;
+    font-size: 50px;
+    opacity: 0.2;
+    bottom: -80px;
+    left: -60px;
+    pointer-events: none;
+}
+
+/* --- CONTAINERUL PRINCIPAL ALB (ACUM MAI MARE ȘI MAI SPAȚIOS) --- */
 .container {
     text-align: center;
     background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     position: relative;
-    min-width: 350px;
+    z-index: 2;
+    border-radius: 28px; /* Colțuri o idee mai rotunjite, dă un aer mai soft */
+    box-shadow: 0 15px 40px rgba(214, 51, 132, 0.08);
+
+    /* MODIFICĂRILE PENTRU SPAȚIU MAI MARE: */
+    width: 900px;         /* Am mărit lățimea de la 420px la 500px */
+    min-height: 450px;    /* Îi dăm o înălțime minimă ca să nu mai fie strâns */
+    padding: 50px 45px;   /* Spațiu interior mai mare (sus-jos / stânga-dreapta) */
+
+    max-width: 95%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Pune conținutul perfect pe mijlocul noului spațiu */
 }
 
 h1 {
     color: #d63384;
     margin-bottom: 30px;
+    font-size: 45px; /* Un pic mai mare ca să se potrivească cu noul container */
 }
 
-/* Aliniere butoane unul lângă altul */
+/* --- SISTEM STELUȚE --- */
+.stars {
+    font-size: 70px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    user-select: none;
+}
+
+.star {
+    color: #ccc;
+    transition: color 0.2s, transform 0.1s;
+}
+
+.star:hover {
+    transform: scale(1.2);
+}
+
+.star.active {
+    color: #ffca28;
+}
+
+/* --- BUTOANE --- */
 .buttons {
     display: flex;
     flex-direction: row;
@@ -35,48 +117,307 @@ h1 {
 }
 
 button {
-    padding: 12px 30px;
-    font-size: 18px;
+    padding: 14px 32px;
+    font-size: 30px;
     font-weight: bold;
     cursor: pointer;
     border: none;
-    border-radius: 10px;
-    transition: transform 0.1s;
+    border-radius: 12px;
+    transition: transform 0.1s, background-color 0.2s, box-shadow 0.2s;
 }
 
-button:hover {
-    transform: scale(1.05);
+button:hover:not(:disabled) {
+    transform: scale(1.03);
+}
+
+#next-btn {
+    background-color: #d63384;
+    color: white;
+    width: 40%;
+}
+
+button:disabled {
+    background-color: #e0e0e0 !important;
+    color: #888888;
+    cursor: not-allowed;
 }
 
 #yes-btn {
     background-color: #4caf50;
     color: white;
+
 }
 
 #no-btn {
     background-color: #f44336;
     color: white;
-    /* Adăugăm o tranziție rapidă pentru o mișcare mai fluidă când fuge */
     transition: left 0.1s ease, top 0.1s ease;
 }
 
-#date-panel {
-    display: none;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 2px solid #ffe4e1;
-}
-
-input[type="date"] {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #d63384;
-    outline: none;
-    font-size: 16px;
-}
-
 #confirm-btn {
-    margin-top: 15px;
-    background-color: #d63384;
+    margin-top: 25px;
+    background-color: #4caf50;
     color: white;
+    width: 40%;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+#confirm-btn:hover {
+    background-color: #43a047;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* --- COLOANA METRICĂ PENTRU NOUL INPUT --- */
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 340px; /* Am lărgit subtil și capsula ca să dea bine în containerul mare */
+    margin: 0 auto 10px auto;
+}
+
+/* --- CĂSUȚA ROZ PENTRU DATĂ --- */
+.input-wrapper input,
+.flatpickr-input,
+.flatpickr-input.form-control,
+input[id="calendar"] {
+    font-family: 'Segoe UI', sans-serif !important;
+    padding: 16px 50px 16px 20px !important;
+    border-radius: 16px !important;
+    border: 2px solid #ffb6c1 !important;
+    background-color: #fffafb !important;
+    color: #d63384 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    outline: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    box-shadow: 0 4px 12px rgba(214, 51, 132, 0.08) !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    display: block !important;
+}
+
+.input-wrapper input:hover,
+.flatpickr-input:hover,
+.flatpickr-input:focus {
+    border-color: #d63384 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 6px 20px rgba(214, 51, 132, 0.15) !important;
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 20px;
+    top: 48%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* --- POP-UP CALENDAR REPARAT (POZIȚIONARE INTELIGENTĂ ȘI AFIȘARE COMPLETĂ) --- */
+.flatpickr-calendar,
+div.flatpickr-calendar {
+    background: #ffffff !important;
+    border-radius: 18px !important;
+    border: 1px solid #ffe4e1 !important;
+    box-shadow: 0 12px 35px rgba(214, 51, 132, 0.15) !important;
+    font-family: 'Segoe UI', sans-serif !important;
+    padding: 15px 10px 10px 10px !important;
+    width: 315px !important;
+    box-sizing: border-box !important;
+}
+
+/* Fixăm zona de sus pentru a asigura alinierea perfectă pe orizontală */
+.flatpickr-months {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: relative !important;
+    height: 35px !important;
+    margin-bottom: 10px !important;
+    padding: 0 10px !important;
+}
+
+/* Forțăm luna și anul să stea cuminți pe același rând, fără suprapuneri */
+.flatpickr-current-month {
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    transform: none !important;
+    color: #d63384 !important;
+}
+
+/* Stilizare text pentru dropdown-ul Lunii (ex: Mai) */
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    color: #d63384 !important;
+    font-family: 'Segoe UI', sans-serif !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+/* Stilizare text pentru input-ul Anului (ex: 2026) */
+.flatpickr-current-month input.cur-year {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    color: #d63384 !important;
+    font-family: 'Segoe UI', sans-serif !important;
+    width: 52px !important; /* Lățime fixă perfectă pentru 4 cifre */
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    pointer-events: none; /* Previne selectarea accidentală pe mobil */
+}
+
+/* Repoziționăm săgețile în margini, fără să se atingă de text */
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    padding: 5px !important;
+    cursor: pointer !important;
+    z-index: 10 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.flatpickr-months .flatpickr-prev-month { left: 5px !important; }
+.flatpickr-months .flatpickr-next-month { right: 5px !important; }
+
+.flatpickr-months .flatpickr-prev-month svg,
+.flatpickr-months .flatpickr-next-month svg {
+    width: 14px !important;
+    height: 14px !important;
+    fill: #d63384 !important;
+}
+
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+    fill: #ff7ea5 !important;
+}
+
+/* --- STRUCTURA ZILELOR --- */
+.flatpickr-innerContainer {
+    justify-content: center !important;
+}
+
+.flatpickr-days {
+    width: 295px !important;
+}
+
+.dayContainer {
+    width: 295px !important;
+    min-width: 295px !important;
+    max-width: 295px !important;
+}
+
+span.flatpickr-weekday {
+    color: #ff7ea5 !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+}
+
+.flatpickr-day {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    max-width: 38px !important;
+    margin: 2px !important;
+    color: #333333 !important;
+}
+
+.flatpickr-day.selected, .flatpickr-day.selected:hover {
+    background: #d63384 !important;
+    border-color: #d63384 !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+
+.flatpickr-day:hover {
+    background: #ffe4e1 !important;
+    border-color: #ffe4e1 !important;
+    color: #d63384 !important;
+    border-radius: 10px !important;
+}
+
+.flatpickr-day.today {
+    border-color: #ffb6c1 !important;
+    border-radius: 10px !important;
+}
+
+/* --- NOTIFICARE PERSONALIZATĂ (STIL CURAT CU X) --- */
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.25); /* Fundal întunecat discret */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.custom-alert-box {
+    background: white;
+    padding: 45px 30px 35px 30px; /* Mai mult spațiu sus pentru X */
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 360px;
+    max-width: 85%;
+    border: 2px solid #ffb6c1;
+    position: relative; /* Necesar pentru a alinia X-ul absolut */
+}
+
+/* Stilul pentru butonul X */
+.close-x {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.close-x:hover {
+    color: #d63384; /* Se face roz la hover */
+}
+
+.custom-alert-icon {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.custom-alert-box h2 {
+    color: #d63384;
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.custom-alert-box p {
+    color: #444444;
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.4;
 }
