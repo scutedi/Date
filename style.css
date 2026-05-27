@@ -9,6 +9,9 @@ body {
     background-color: #ffe4e1;
     overflow: hidden;
     position: relative;
+    /* Previne selectarea textului pe tot ecranul, eliminând bug-urile de pe mobil */
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 /* Flori mari în colțurile ecranului */
@@ -55,7 +58,7 @@ body::after {
     pointer-events: none;
 }
 
-/* --- CONTAINERUL PRINCIPAL ALB (PENTRU CALCULATOR) --- */
+/* --- CONTAINERUL PRINCIPAL ALB (ACUM ȘI MAI LAT PE PC) --- */
 .container {
     text-align: center;
     background: white;
@@ -64,9 +67,9 @@ body::after {
     border-radius: 28px;
     box-shadow: 0 15px 40px rgba(214, 51, 132, 0.08);
 
-    width: 900px;         /* Mare pe PC */
-    min-height: 450px;
-    padding: 50px 45px;
+    width: 900px;        /* Am mărit lățimea de la 900px la 1050px! */
+    min-height: 460px;
+    padding: 55px 50px;
 
     max-width: 95%;
     box-sizing: border-box;
@@ -77,24 +80,31 @@ body::after {
 
 h1 {
     color: #d63384;
-    margin-bottom: 30px;
-    font-size: 45px; /* Mare pe PC */
+    margin-bottom: 35px;
+    font-size: 46px;
 }
 
-/* --- SISTEM STELUȚE --- */
+/* --- SISTEM STELUȚE REPARAT PENTRU MOBIL --- */
 .stars {
-    font-size: 70px; /* Mari pe PC */
+    font-size: 70px;
     cursor: pointer;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     display: flex;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
+    -webkit-user-select: none;
     user-select: none;
+    -webkit-tap-highlight-color: transparent; /* Scoate chenarul albastru urât de pe mobil la apăsare */
 }
 
 .star {
     color: #ccc;
     transition: color 0.2s, transform 0.1s;
+    display: inline-block;
+    /* FIX CRUCIAL: Adăugăm padding lateral ca degetul să nimerească steluța instant pe telefon */
+    padding: 0 4px;
+    position: relative;
+    z-index: 10;
 }
 
 .star:hover {
@@ -110,19 +120,20 @@ h1 {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 20px;
+    gap: 24px;
     align-items: center;
     min-height: 50px;
 }
 
 button {
-    padding: 14px 32px;
-    font-size: 30px; /* Mari pe PC */
+    padding: 14px 36px;
+    font-size: 30px;
     font-weight: bold;
     cursor: pointer;
     border: none;
     border-radius: 12px;
     transition: transform 0.1s, background-color 0.2s, box-shadow 0.2s;
+    -webkit-tap-highlight-color: transparent;
 }
 
 button:hover:not(:disabled) {
@@ -132,7 +143,7 @@ button:hover:not(:disabled) {
 #next-btn {
     background-color: #d63384;
     color: white;
-    width: 40%;
+    width: 35%;
 }
 
 button:disabled {
@@ -156,7 +167,7 @@ button:disabled {
     margin-top: 25px;
     background-color: #4caf50;
     color: white;
-    width: 40%;
+    width: 35%;
     box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
@@ -196,15 +207,7 @@ input[id="calendar"] {
     display: block !important;
 }
 
-.input-wrapper input:hover,
-.flatpickr-input:hover,
-.flatpickr-input:focus {
-    border-color: #d63384 !important;
-    background-color: #ffffff !important;
-    box-shadow: 0 6px 20px rgba(214, 51, 132, 0.15) !important;
-}
-
-/* --- POP-UP CALENDAR REPARAT --- */
+/* --- POP-UP CALENDAR --- */
 .flatpickr-calendar,
 div.flatpickr-calendar {
     background: #ffffff !important;
@@ -258,7 +261,6 @@ div.flatpickr-calendar {
     width: 52px !important;
     border: none !important;
     background: transparent !important;
-    box-shadow: none !important;
     pointer-events: none;
 }
 
@@ -306,14 +308,7 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
     border-radius: 10px !important;
 }
 
-.flatpickr-day:hover {
-    background: #ffe4e1 !important;
-    border-color: #ffe4e1 !important;
-    color: #d63384 !important;
-    border-radius: 10px !important;
-}
-
-/* --- NOTIFICARE PERSONALIZATĂ --- */
+/* --- NOTIFICARE PERSONALIZATĂ CU X --- */
 .custom-alert-overlay {
     position: fixed;
     top: 0;
@@ -358,47 +353,84 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
 
 
 /* ==========================================================================
-   --- OPTIMIZARE SPECIALĂ PENTRU TELEFON (ECRANE SUB 768px) ---
+   --- OPTIMIZARE COMPLETĂ PENTRU MOBIL ---
    ========================================================================== */
 @media (max-width: 768px) {
-    /* Facem containerul alb să ocupe frumos ecranul telefonului */
     .container {
-        width: 95%;
+        width: 98%;
         min-height: auto;
-        padding: 30px 20px;
-        border-radius: 20px;
+        padding: 35px 20px;
+        border-radius: 22px;
     }
 
-    /* Micșorăm scrisul din titluri ca să nu se rupă urât pe două-trei rânduri */
     h1 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    /* Micșorăm steluțele ca să încapă toate 10 pe un singur rând pe mobil */
-    .stars {
-        font-size: 28px; /* Redus de la 70px */
-        gap: 3px;
+        font-size: 20px;
         margin-bottom: 25px;
     }
 
-    /* Adaptăm dimensiunea butoanelor pentru degetele pe ecran */
+    /* Steluțele pe mobil primesc o așezare optimizată pentru a fi ușor de atins */
+    .stars {
+        font-size: 25px; /* Dimensiune ideală pentru ecran tactil */
+        gap: 1px;
+        margin-bottom: 30px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .star {
+        padding: 0 5px; /* Mărește invizibil lățimea fiecărei steluțe pe mobil ca să o poți selecta lejer */
+    }
+
     button {
-        font-size: 18px; /* Redus de la 30px */
+        font-size: 18px;
         padding: 12px 24px;
     }
 
-    /* Butoanele de Continuu și Confirmă vor ocupa 80% din lățime pe mobil pentru a fi ușor de apăsat */
     #next-btn, #confirm-btn {
-        width: 80%;
+        width: 75%;
     }
 
-    /* Ascundem florițele decorative mici de pe lângă container ca să nu aglomereze ecranul */
     .container::before, .container::after {
         display: none;
     }
 
-    /* Micșorăm florile mari din fundal ca să lase textul să fie citit clar */
-    body::before { font-size: 80px; }
-    body::after { font-size: 90px; }
+    /* --- CORECTURĂ POP-UP PE TELEFON --- */
+    .custom-alert-box {
+        width: 88%;               /* Face pop-up-ul mai îngust și extrem de elegant pe telefon */
+        padding: 30px 20px 25px 20px; /* Reduce spațiile goale din interior */
+        border-radius: 16px;      /* Colțuri o idee mai finuțe asortate cu ecranul */
+    }
+
+    .custom-alert-icon {
+        font-size: 40px;          /* Micșorează inima 3D din centru ca să nu ocupe jumătate de ecran */
+        margin-bottom: 8px;
+    }
+
+    .custom-alert-box h2 {
+        font-size: 22px;          /* Micșorează titlul "Perfect!" */
+        margin-bottom: 8px;
+    }
+
+    .custom-alert-box p {
+        font-size: 15px;          /* Textul cu data devine perfect lizibil pe un singur rând sau două rânduri curate */
+        line-height: 1.3;
+    }
+
+    .close-x {
+        font-size: 24px;          /* X-ul din colț devine o idee mai discret, dar perfect mulat pe deget */
+        top: 10px;
+        right: 14px;
+    }
+
+    /* --- REPARARE FILTRU CALENDAR PENTRU MOBIL --- */
+    .flatpickr-calendar {
+        width: 290px !important;  /* Împiedică calendarul să devină uriaș pe ecrane de telefon mici */
+    }
+    .flatpickr-months .flatpickr-prev-month,
+    .flatpickr-months .flatpickr-next-month {
+        top: 45% !important;     /* Aliniază perfect săgețile de stânga-dreapta cu textul lunii */
+    }
+
+    body::before { font-size: 70px; }
+    body::after { font-size: 80px; }
 }
