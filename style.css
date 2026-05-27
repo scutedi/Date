@@ -1,0 +1,75 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #ffe4e1; /* Roz pal */
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    position: relative;
+    min-width: 350px;
+    transition: all 0.5s ease;
+}
+
+h1 {
+    color: #d63384;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+#yes-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+#no-btn {
+    background-color: #f44336;
+    color: white;
+    position: absolute; /* Necesar pentru a se mișca liber */
+}
+
+.hidden {
+    display: none;
+}
+
+#date-panel {
+    margin-top: 20px;
+    padding: 20px;
+    border-top: 2px solid #ffe4e1;
+}
+
+input[type="date"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #d63384;
+    outline: none;
+}
+
+.confirm-btn {
+    background-color: #d63384;
+    color: white;
+}

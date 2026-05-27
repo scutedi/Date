@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vrei să ieșim?</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe4e1;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            min-width: 300px;
+        }
+
+        h1 {
+            color: #d63384;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+
+        #yes-btn {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #no-btn {
+            background-color: #f44336;
+            color: white;
+            position: absolute; /* Esențial pentru mișcarea random */
+        }
+
+        #date-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-top: 2px solid #ffe4e1;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="main-container">
+    <h1 id="question">Vrei să ieșim la o cafea/suc? 😊</h1>
+
+    <div class="buttons" id="btn-group">
+        <button id="yes-btn" onclick="showDatePanel()">DA</button>
+        <button id="no-btn">NU</button>
+    </div>
+
+    <div id="date-panel">
+        <h3>Super! Alege o zi care îți convine:</h3>
+        <input type="date" id="calendar">
+        <br><br>
+        <button id="yes-btn" onclick="confirmDate()">Confirmă</button>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById('no-btn');
+    const container = document.getElementById('main-container');
+
+    // Funcția care mișcă butonul "NU" la întâmplare
+    noBtn.addEventListener('mouseover', () => {
+        const containerRect = container.getBoundingClientRect();
+        const btnRect = noBtn.getBoundingClientRect();
+
+        // Calculăm limitele pentru a nu ieși din ecran sau container prea mult
+        const maxX = window.innerWidth - btnRect.width;
+        const maxY = window.innerHeight - btnRect.height;
+
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+
+        noBtn.style.left = randomX + 'px';
+        noBtn.style.top = randomY + 'px';
+    });
+
+    function showDatePanel() {
+        document.getElementById('question').innerText = "Mă bucur mult! ❤️";
+        document.getElementById('btn-group').style.display = 'none';
+        document.getElementById('date-panel').style.display = 'block';
+    }
+
+    function confirmDate() {
+        const selectedDate = document.getElementById('calendar').value;
+        if (selectedDate) {
+            alert("Perfect! Ne vedem pe " + selectedDate + "!");
+        } else {
+            alert("Te rog alege o dată.");
+        }
+    }
+</script>
+
+</body>
+</html>
