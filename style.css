@@ -15,7 +15,7 @@ body {
 body::before {
     content: "🌸";
     position: absolute;
-    font-size: 100px;
+    font-size: 140px;
     opacity: 0.15;
     top: -20px;
     left: -20px;
@@ -55,36 +55,35 @@ body::after {
     pointer-events: none;
 }
 
-/* --- CONTAINERUL PRINCIPAL ALB (ACUM MAI MARE ȘI MAI SPAȚIOS) --- */
+/* --- CONTAINERUL PRINCIPAL ALB (PENTRU CALCULATOR) --- */
 .container {
     text-align: center;
     background: white;
     position: relative;
     z-index: 2;
-    border-radius: 28px; /* Colțuri o idee mai rotunjite, dă un aer mai soft */
+    border-radius: 28px;
     box-shadow: 0 15px 40px rgba(214, 51, 132, 0.08);
 
-    /* MODIFICĂRILE PENTRU SPAȚIU MAI MARE: */
-    width: 550px;         /* Am mărit lățimea de la 420px la 500px */
-    min-height: 300px;    /* Îi dăm o înălțime minimă ca să nu mai fie strâns */
-    padding: 50px 45px;   /* Spațiu interior mai mare (sus-jos / stânga-dreapta) */
+    width: 900px;         /* Mare pe PC */
+    min-height: 450px;
+    padding: 50px 45px;
 
     max-width: 95%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Pune conținutul perfect pe mijlocul noului spațiu */
+    justify-content: center;
 }
 
 h1 {
     color: #d63384;
     margin-bottom: 30px;
-    font-size: 28px; /* Un pic mai mare ca să se potrivească cu noul container */
+    font-size: 45px; /* Mare pe PC */
 }
 
 /* --- SISTEM STELUȚE --- */
 .stars {
-    font-size: 40px;
+    font-size: 70px; /* Mari pe PC */
     cursor: pointer;
     margin-bottom: 30px;
     display: flex;
@@ -118,7 +117,7 @@ h1 {
 
 button {
     padding: 14px 32px;
-    font-size: 20px;
+    font-size: 30px; /* Mari pe PC */
     font-weight: bold;
     cursor: pointer;
     border: none;
@@ -145,7 +144,6 @@ button:disabled {
 #yes-btn {
     background-color: #4caf50;
     color: white;
-
 }
 
 #no-btn {
@@ -167,11 +165,11 @@ button:disabled {
     box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
 }
 
-/* --- COLOANA METRICĂ PENTRU NOUL INPUT --- */
+/* --- COLOANA METRICĂ PENTRU INPUT --- */
 .input-wrapper {
     position: relative;
     width: 100%;
-    max-width: 340px; /* Am lărgit subtil și capsula ca să dea bine în containerul mare */
+    max-width: 340px;
     margin: 0 auto 10px auto;
 }
 
@@ -181,7 +179,7 @@ button:disabled {
 .flatpickr-input.form-control,
 input[id="calendar"] {
     font-family: 'Segoe UI', sans-serif !important;
-    padding: 16px 50px 16px 20px !important;
+    padding: 16px 20px !important;
     border-radius: 16px !important;
     border: 2px solid #ffb6c1 !important;
     background-color: #fffafb !important;
@@ -206,17 +204,7 @@ input[id="calendar"] {
     box-shadow: 0 6px 20px rgba(214, 51, 132, 0.15) !important;
 }
 
-.calendar-icon {
-    position: absolute;
-    right: 20px;
-    top: 48%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    pointer-events: none;
-    z-index: 5;
-}
-
-/* --- POP-UP CALENDAR REPARAT (POZIȚIONARE INTELIGENTĂ ȘI AFIȘARE COMPLETĂ) --- */
+/* --- POP-UP CALENDAR REPARAT --- */
 .flatpickr-calendar,
 div.flatpickr-calendar {
     background: #ffffff !important;
@@ -229,7 +217,6 @@ div.flatpickr-calendar {
     box-sizing: border-box !important;
 }
 
-/* Fixăm zona de sus pentru a asigura alinierea perfectă pe orizontală */
 .flatpickr-months {
     display: flex !important;
     align-items: center !important;
@@ -240,7 +227,6 @@ div.flatpickr-calendar {
     padding: 0 10px !important;
 }
 
-/* Forțăm luna și anul să stea cuminți pe același rând, fără suprapuneri */
 .flatpickr-current-month {
     position: static !important;
     display: flex !important;
@@ -254,7 +240,6 @@ div.flatpickr-calendar {
     color: #d63384 !important;
 }
 
-/* Stilizare text pentru dropdown-ul Lunii (ex: Mai) */
 .flatpickr-current-month .flatpickr-monthDropdown-months {
     font-size: 18px !important;
     font-weight: bold !important;
@@ -262,27 +247,21 @@ div.flatpickr-calendar {
     font-family: 'Segoe UI', sans-serif !important;
     background: transparent !important;
     border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
     cursor: pointer !important;
 }
 
-/* Stilizare text pentru input-ul Anului (ex: 2026) */
 .flatpickr-current-month input.cur-year {
     font-size: 18px !important;
     font-weight: bold !important;
     color: #d63384 !important;
     font-family: 'Segoe UI', sans-serif !important;
-    width: 52px !important; /* Lățime fixă perfectă pentru 4 cifre */
-    padding: 0 !important;
-    margin: 0 !important;
+    width: 52px !important;
     border: none !important;
     background: transparent !important;
     box-shadow: none !important;
-    pointer-events: none; /* Previne selectarea accidentală pe mobil */
+    pointer-events: none;
 }
 
-/* Repoziționăm săgețile în margini, fără să se atingă de text */
 .flatpickr-months .flatpickr-prev-month,
 .flatpickr-months .flatpickr-next-month {
     position: absolute !important;
@@ -292,7 +271,7 @@ div.flatpickr-calendar {
     cursor: pointer !important;
     z-index: 10 !important;
     display: flex !important;
-    align-items: center !important;
+    align-items: center;
 }
 
 .flatpickr-months .flatpickr-prev-month { left: 5px !important; }
@@ -305,31 +284,10 @@ div.flatpickr-calendar {
     fill: #d63384 !important;
 }
 
-.flatpickr-months .flatpickr-prev-month:hover svg,
-.flatpickr-months .flatpickr-next-month:hover svg {
-    fill: #ff7ea5 !important;
-}
-
-/* --- STRUCTURA ZILELOR --- */
-.flatpickr-innerContainer {
-    justify-content: center !important;
-}
-
-.flatpickr-days {
-    width: 295px !important;
-}
-
-.dayContainer {
-    width: 295px !important;
-    min-width: 295px !important;
-    max-width: 295px !important;
-}
-
-span.flatpickr-weekday {
-    color: #ff7ea5 !important;
-    font-weight: bold !important;
-    font-size: 14px !important;
-}
+.flatpickr-innerContainer { justify-content: center !important; }
+.flatpickr-days { width: 295px !important; }
+.dayContainer { width: 295px !important; min-width: 295px !important; max-width: 295px !important; }
+span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important; font-size: 14px !important; }
 
 .flatpickr-day {
     font-size: 15px !important;
@@ -355,19 +313,14 @@ span.flatpickr-weekday {
     border-radius: 10px !important;
 }
 
-.flatpickr-day.today {
-    border-color: #ffb6c1 !important;
-    border-radius: 10px !important;
-}
-
-/* --- NOTIFICARE PERSONALIZATĂ (STIL CURAT CU X) --- */
+/* --- NOTIFICARE PERSONALIZATĂ --- */
 .custom-alert-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.25); /* Fundal întunecat discret */
+    background: rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -376,17 +329,16 @@ span.flatpickr-weekday {
 
 .custom-alert-box {
     background: white;
-    padding: 45px 30px 35px 30px; /* Mai mult spațiu sus pentru X */
+    padding: 45px 30px 35px 30px;
     border-radius: 20px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     width: 360px;
     max-width: 85%;
     border: 2px solid #ffb6c1;
-    position: relative; /* Necesar pentru a alinia X-ul absolut */
+    position: relative;
 }
 
-/* Stilul pentru butonul X */
 .close-x {
     position: absolute;
     top: 12px;
@@ -399,25 +351,54 @@ span.flatpickr-weekday {
     line-height: 1;
 }
 
-.close-x:hover {
-    color: #d63384; /* Se face roz la hover */
-}
+.close-x:hover { color: #d63384; }
+.custom-alert-icon { font-size: 35px; margin-bottom: 10px; }
+.custom-alert-box h2 { color: #d63384; margin: 0 0 10px 0; font-size: 24px; font-weight: bold; }
+.custom-alert-box p { color: #444444; font-size: 16px; margin: 0; line-height: 1.4; }
 
-.custom-alert-icon {
-    font-size: 35px;
-    margin-bottom: 10px;
-}
 
-.custom-alert-box h2 {
-    color: #d63384;
-    margin: 0 0 10px 0;
-    font-size: 24px;
-    font-weight: bold;
-}
+/* ==========================================================================
+   --- OPTIMIZARE SPECIALĂ PENTRU TELEFON (ECRANE SUB 768px) ---
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* Facem containerul alb să ocupe frumos ecranul telefonului */
+    .container {
+        width: 95%;
+        min-height: auto;
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
 
-.custom-alert-box p {
-    color: #444444;
-    font-size: 16px;
-    margin: 0;
-    line-height: 1.4;
+    /* Micșorăm scrisul din titluri ca să nu se rupă urât pe două-trei rânduri */
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    /* Micșorăm steluțele ca să încapă toate 10 pe un singur rând pe mobil */
+    .stars {
+        font-size: 28px; /* Redus de la 70px */
+        gap: 3px;
+        margin-bottom: 25px;
+    }
+
+    /* Adaptăm dimensiunea butoanelor pentru degetele pe ecran */
+    button {
+        font-size: 18px; /* Redus de la 30px */
+        padding: 12px 24px;
+    }
+
+    /* Butoanele de Continuu și Confirmă vor ocupa 80% din lățime pe mobil pentru a fi ușor de apăsat */
+    #next-btn, #confirm-btn {
+        width: 80%;
+    }
+
+    /* Ascundem florițele decorative mici de pe lângă container ca să nu aglomereze ecranul */
+    .container::before, .container::after {
+        display: none;
+    }
+
+    /* Micșorăm florile mari din fundal ca să lase textul să fie citit clar */
+    body::before { font-size: 80px; }
+    body::after { font-size: 90px; }
 }
