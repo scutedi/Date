@@ -112,7 +112,7 @@ h1 {
 
 /* --- SISTEM STELUȚE --- */
 .stars {
-    font-size: 70px;
+    font-size: 100px;
     cursor: pointer;
     margin-bottom: 35px;
     display: flex;
@@ -401,7 +401,7 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
     }
 
     .stars {
-        font-size: 24px;
+        font-size: 35px;
         gap: 2px;
         margin-bottom: 30px;
         width: 100%;
