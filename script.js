@@ -29,7 +29,7 @@ const myCalendar = flatpickr("#calendar", {
     dateFormat: "Y-m-d",
     altInput: true,
     altFormat: "j F Y",
-    position: "below center", // MODIFICAT AICI: Îl obligă să apară mereu pe centru, fără să mai vină din dreapta
+    position: "static", // MODIFICAT AICI: Oprește calculele automate ale scriptului
     closeOnSelect: true
 });
 
