@@ -460,11 +460,14 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
         width: 200px !important;
         position: absolute !important;
         z-index: 99999 !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        margin-top: -140px !important;
+        left: 0 !important;             /* Resetăm alinierea veche */
+        right: 0 !important;            /* Resetăm alinierea veche */
+        margin-left: auto !important;   /* Forțează centrarea perfectă pe orizontală */
+        margin-right: auto !important;  /* Forțează centrarea perfectă pe orizontală */
+        margin-top: -140px !important;  /* Îl ridică frumos peste container */
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25) !important;
         background: #ffffff !important;
+        transform: none !important;     /* Elimină animația greșită a browserului */
     }
 
     /* --- MODIFICAT EXCLUSIV PENTRU TELEFON: Scris mic și lățime strânsă la bordură --- */

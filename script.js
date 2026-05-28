@@ -29,8 +29,8 @@ const myCalendar = flatpickr("#calendar", {
     dateFormat: "Y-m-d",
     altInput: true,
     altFormat: "j F Y",
-    position: "auto left", // Îl pune în dreapta pe PC și jos pe telefon automat
-    closeOnSelect: true    // Se închide automat DOAR când selectezi o zi
+    position: "below center", // MODIFICAT AICI: Îl obligă să apară mereu pe centru, fără să mai vină din dreapta
+    closeOnSelect: true
 });
 
 // --- FIXUL SUPREM PENTRU BLOCARE ÎNCHIDERE LA SCROLL/ATINGERE FUNDAL ---
