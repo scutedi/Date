@@ -442,9 +442,25 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
         right: 14px;
     }
 
-    /* --- REPARARE FILTRU CALENDAR PENTRU MOBIL --- */
+    /* --- REPARARE ȘI SUPRAPUNERE CALENDAR PESTE CONTAINER PE MOBIL --- */
     .flatpickr-calendar {
-        width: 290px !important;
+        width: 200px !important;
+        position: absolute !important;
+        z-index: 99999 !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin-top: -140px !important;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25) !important;
+        background: #ffffff !important;
+    }
+
+    /* --- MODIFICAT EXCLUSIV PENTRU TELEFON: Textul datei este mai mic acum --- */
+    .input-wrapper input,
+    .flatpickr-input,
+    .flatpickr-input.form-control,
+    input[id="calendar"] {
+        font-size: 15px !important; /* Calibrat perfect doar pentru mobil */
+        padding: 14px 15px !important;
     }
 
     .flatpickr-months .flatpickr-prev-month,
