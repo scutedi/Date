@@ -375,7 +375,7 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
     }
 
     h1 {
-        font-size: 20px;
+        font-size: 100%;
         margin-bottom: 25px;
         white-space: nowrap !important; /* Textul rămâne fixat complet pe un singur rând */
         width: 100%;
