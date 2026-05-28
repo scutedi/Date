@@ -201,8 +201,13 @@ input[id="calendar"] {
     border: 2px solid #ffb6c1 !important;
     background-color: #fffafb !important;
     color: #d63384 !important;
-    font-size: 18px !important;
+
+    /* MODIFICAREA DE DIMENSIUNE: Schimbat de la 18px la 24px pentru un impact vizual maxim */
+    font-size: 24px !important;
+
+    /* Ne asigurăm că rămâne foarte bine îngroșat și lizibil */
     font-weight: 700 !important;
+
     outline: none !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -298,7 +303,7 @@ div.flatpickr-calendar {
 span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important; font-size: 14px !important; }
 
 .flatpickr-day {
-    font-size: 15px !important;
+    font-size: 20px !important;
     font-weight: 600 !important;
     height: 38px !important;
     line-height: 38px !important;

@@ -21,16 +21,44 @@ const alertIcon = document.querySelector('.custom-alert-icon');
 
 let selectedRating = 0;
 
-// --- INIȚIALIZARE CALENDAR INTELIGENT ---
-flatpickr("#calendar", {
+// --- INIȚIALIZARE CALENDAR INTELIGENT (SALVAT ÎN VARIABILĂ) ---
+const myCalendar = flatpickr("#calendar", {
     locale: Romanian,
     disableMobile: true,
     minDate: "today",
     dateFormat: "Y-m-d",
     altInput: true,
     altFormat: "j F Y",
-    position: "auto left" // Îl pune în dreapta pe PC și jos pe telefon automat
+    position: "auto left", // Îl pune în dreapta pe PC și jos pe telefon automat
+    closeOnSelect: true    // Se închide automat DOAR când selectezi o zi
 });
+
+// --- FIXUL SUPREM PENTRU BLOCARE ÎNCHIDERE LA SCROLL/ATINGERE FUNDAL ---
+// Pentru Calculator (mouse)
+document.addEventListener("mousedown", function(event) {
+    // Verificăm dacă calendarul este creat, dacă e deschis și dacă utilizatorul NU a selectat încă o dată
+    if (myCalendar && myCalendar.isOpen && myCalendar.selectedDates.length === 0) {
+        // Dacă persoana a dat click pe fundal, pe text sau a tras de ecran (în afara calendarului propriu-zis)
+        if (!myCalendar.calendarContainer.contains(event.target) && !event.target.closest(".input-wrapper")) {
+            // Oprim browserul din a rula logica de închidere automată
+            event.preventDefault();
+            event.stopPropagation();
+            myCalendar.open(); // Îl forțăm să rămână activ
+        }
+    }
+}, true); // „true” interceptează acțiunea înainte ca Flatpickr să apuce să reacționeze
+
+// Pentru Telefon (touchscreen)
+document.addEventListener("touchstart", function(event) {
+    if (myCalendar && myCalendar.isOpen && myCalendar.selectedDates.length === 0) {
+        if (!myCalendar.calendarContainer.contains(event.target) && !event.target.closest(".input-wrapper")) {
+            event.preventDefault();
+            event.stopPropagation();
+            myCalendar.open();
+        }
+    }
+}, { passive: false, capture: true });
+
 
 // --- LOGICĂ PAS 1: STELUȚE ---
 stars.forEach(star => {
@@ -89,11 +117,7 @@ function showAlert(title, message, icon = "❤️") {
     customAlert.style.display = 'flex';
 }
 
-// Închiriere pop-up custom la apăsarea butonului
-alertClose.addEventListener('click', () => {
-    customAlert.style.display = 'none';
-});
-
+// Închidere pop-up custom la apăsarea butonului X
 alertClose.addEventListener('click', () => {
     customAlert.style.display = 'none';
 });
@@ -108,17 +132,21 @@ customAlert.addEventListener('click', (e) => {
 // --- LOGICĂ PAS 3: FIREBASE INTERCONECTATĂ CU NOUL POP-UP ---
 confirmBtn.addEventListener('click', async () => {
     const rawDate = document.getElementById('calendar').value; // Format bază de date: Y-m-d
-    const calendarInstance = document.getElementById('calendar')._flatpickr;
 
     // Extrage textul frumos scris în română din input-ul generat de Flatpickr (ex: 31 Mai 2026)
-    const formattedDate = calendarInstance ? calendarInstance.altInput.value : rawDate;
+    const formattedDate = myCalendar ? myCalendar.altInput.value : rawDate;
 
     if (!rawDate) {
-        showAlert("Oups! 🙈", "Te rog alege o dată înainte de a confirma.", "📅", false);
+        showAlert("Oups! 🙈", "Te rog alege o dată înainte de a confirma.", "📅");
         return;
     }
 
     try {
+        // Închidem manual calendarul chiar înainte de a trimite datele, ca să nu rămână peste pop-up-ul de succes
+        if (myCalendar) {
+            myCalendar.close();
+        }
+
         await addDoc(collection(db, "dates"), {
             rating: selectedRating,
             selectedDate: rawDate,
@@ -126,9 +154,9 @@ confirmBtn.addEventListener('click', async () => {
         });
 
         // Afișează superba ta notificare personalizată
-        showAlert("Perfect! 🥰", `Abia aștept! Ne vedem pe ${formattedDate} !`, "❤️", true);
+        showAlert("Perfect! 🥰", `Abia aștept! Ne vedem pe ${formattedDate} !`, "❤️");
     } catch (error) {
         console.error(error);
-        showAlert("Eroare 😢", "Ceva nu a mers bine la salvarea datelor în Firebase.", "❌", false);
+        showAlert("Eroare 😢", "Ceva nu a mers bine la salvarea datelor în Firebase.", "❌");
     }
 });
