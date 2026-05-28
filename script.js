@@ -129,6 +129,34 @@ customAlert.addEventListener('click', (e) => {
     }
 });
 
+function creeazaFloriPeFundal() {
+    const elemente = ["🌸", "✨", "🌸", "✨"];
+    // Generăm 16 elemente ca să umple tot ecranul pe lungime
+    for (let i = 0; i < 16; i++) {
+        const span = document.createElement("span");
+        span.innerText = elemente[Math.floor(Math.random() * elemente.length)];
+        span.className = "decor-flower-dinamic";
+
+        // Împrăștiem elementele procentual pe tot ecranul
+        const topRandom = Math.floor(Math.random() * 90) + 5; // Între 5% și 95% înălțime
+        const leftRandom = Math.floor(Math.random() * 88) + 4; // Între 4% și 92% lățime
+        const rotatie = Math.floor(Math.random() * 60) - 30;  // Înclinație romantică
+
+        span.style.top = `${topRandom}%`;
+        span.style.left = `${leftRandom}%`;
+        span.style.transform = `rotate(${rotatie}deg)`;
+
+        // Dimensiuni diferite pentru un aspect natural
+        const dimensiune = Math.floor(Math.random() * 15) + 20; // Între 20px și 35px
+        span.style.fontSize = `${dimensiune}px`;
+
+        document.body.appendChild(span);
+    }
+}
+
+// Pornim ploaia de flori când se încarcă pagina
+window.addEventListener("DOMContentLoaded", creeazaFloriPeFundal);
+
 // --- LOGICĂ PAS 3: FIREBASE INTERCONECTATĂ CU NOUL POP-UP ---
 confirmBtn.addEventListener('click', async () => {
     const rawDate = document.getElementById('calendar').value; // Format bază de date: Y-m-d

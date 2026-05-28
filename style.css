@@ -20,7 +20,7 @@ body {
     user-select: none;
 }
 
-/* Flori mari în colțurile ecranului */
+/* Flori mari originale în colțurile ecranului */
 body::before {
     content: "🌸";
     position: absolute;
@@ -43,7 +43,26 @@ body::after {
     pointer-events: none;
 }
 
-/* Flori mai mici pe lângă container */
+/* --- LOGICĂ MULTIPLE FLORI ȘI STELUȚE PE FUNDAL --- */
+.decor-flower {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1; /* Rămân în spatele containerului alb */
+    user-select: none;
+}
+
+/* Poziționare unică pentru fiecare element decorativ în parte */
+.f1 { top: 12%; left: 10%; font-size: 45px; opacity: 0.16; transform: rotate(12deg); }
+.f2 { top: 28%; left: 5%; font-size: 28px; opacity: 0.22; }
+.f3 { top: 75%; left: 8%; font-size: 50px; opacity: 0.15; transform: rotate(-25deg); }
+.f4 { top: 8%; right: 12%; font-size: 55px; opacity: 0.15; transform: rotate(35deg); }
+.f5 { top: 32%; right: 6%; font-size: 32px; opacity: 0.22; }
+.f6 { top: 70%; right: 10%; font-size: 48px; opacity: 0.14; transform: rotate(-15deg); }
+.f7 { bottom: 10%; left: 48%; font-size: 30px; opacity: 0.2; }
+.f8 { top: 6%; left: 45%; font-size: 35px; opacity: 0.15; transform: rotate(10deg); }
+.f9 { bottom: 45%; left: 3%; font-size: 26px; opacity: 0.18; }
+
+/* Flori de pe marginile containerului principal */
 .container::before {
     content: "✨ 🌸";
     position: absolute;
@@ -201,13 +220,8 @@ input[id="calendar"] {
     border: 2px solid #ffb6c1 !important;
     background-color: #fffafb !important;
     color: #d63384 !important;
-
-    /* MODIFICAREA DE DIMENSIUNE: Schimbat de la 18px la 24px pentru un impact vizual maxim */
-    font-size: 24px !important;
-
-    /* Ne asigurăm că rămâne foarte bine îngroșat și lizibil */
+    font-size: 24px !important; /* Format mare pe calculator */
     font-weight: 700 !important;
-
     outline: none !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -370,25 +384,24 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
 @media (max-width: 768px) {
     .container {
         width: 94% !important;
-        max-width: 380px !important; /* Împiedică containerul să devină prea lat pe telefoane mari */
-        min-width: 290px !important; /* Valoare sigură care nu va crea scroll stânga-dreapta pe telefoane înguste */
+        max-width: 380px !important;
+        min-width: 290px !important;
         min-height: auto;
         padding: 35px 15px;
         border-radius: 22px;
         box-sizing: border-box;
-        margin: 0 auto !important; /* Menține containerul perfect pe centrul ecranului */
+        margin: 0 auto !important;
     }
 
     h1 {
         font-size: 100%;
         margin-bottom: 25px;
-        white-space: nowrap !important; /* Textul rămâne fixat complet pe un singur rând */
+        white-space: nowrap !important;
         width: 100%;
     }
 
-    /* Steluțele pe mobil primesc o așezare optimizată pentru a fi ușor de atins */
     .stars {
-        font-size: 24px; /* Dimensiune optimizată ideală ca toate 10 să stea lejer pe un singur rând */
+        font-size: 24px;
         gap: 2px;
         margin-bottom: 30px;
         width: 100%;
@@ -396,7 +409,7 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
     }
 
     .star {
-        padding: 0 3px; /* Mărește zona invizibilă de atingere a degetului */
+        padding: 0 3px;
     }
 
     button {
@@ -409,7 +422,7 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
     }
 
     .container::before, .container::after {
-        display: none; /* Ascunde detaliile care aglomerau ecranul de mobil */
+        display: none;
     }
 
     /* --- CORECTURĂ POP-UP PE TELEFON --- */
@@ -454,13 +467,15 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
         background: #ffffff !important;
     }
 
-    /* --- MODIFICAT EXCLUSIV PENTRU TELEFON: Textul datei este mai mic acum --- */
+    /* --- MODIFICAT EXCLUSIV PENTRU TELEFON: Scris mic și lățime strânsă la bordură --- */
     .input-wrapper input,
     .flatpickr-input,
     .flatpickr-input.form-control,
     input[id="calendar"] {
-        font-size: 15px !important; /* Calibrat perfect doar pentru mobil */
+        font-size: 14px !important; /* Scris mic la dată pe telefon */
         padding: 14px 15px !important;
+        max-width: 200px !important; /* Bordura roz e mai mică la lățime pe telefon */
+        margin: 0 auto !important;
     }
 
     .flatpickr-months .flatpickr-prev-month,
@@ -468,6 +483,24 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
         top: 45% !important;
     }
 
+    /* Calibrare flori de fundal special pentru ecrane mici */
+    .f1 { font-size: 28px; top: 6%; left: 4%; }
+    .f3 { font-size: 32px; bottom: 6%; left: 5%; top: auto; }
+    .f4 { font-size: 35px; top: 5%; right: 4%; }
+    .f6 { font-size: 30px; bottom: 8%; right: 5%; top: auto; }
+
+    /* Ascundem discret câteva flori intermediare pe mobil ca să nu încarce ecranul mic */
+    .f2, .f5, .f7, .f8, .f9 { display: none; }
+
     body::before { font-size: 70px; }
     body::after { font-size: 80px; }
+}
+
+.decor-flower-dinamic {
+    position: absolute;
+    pointer-events: none; /* Nu blochează atingerile pe ecran */
+    z-index: 1;           /* Rămân în spatele containerului alb */
+    opacity: 0.18;        /* Transparente și discrete, să nu deranjeze la citit */
+    user-select: none;
+    line-height: 1;
 }
