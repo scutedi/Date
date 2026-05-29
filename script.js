@@ -18,6 +18,9 @@ const alertTitle = document.getElementById('custom-alert-title');
 const alertMessage = document.getElementById('custom-alert-message');
 const alertClose = document.getElementById('custom-alert-close');
 const alertIcon = document.querySelector('.custom-alert-icon');
+const stepTiktok = document.getElementById('step-tiktok-animation');
+const tiktokNextBtn = document.getElementById('tiktok-next-btn');
+
 
 let selectedRating = 0;
 
@@ -106,6 +109,11 @@ noBtn.addEventListener('touchstart', (e) => {
 yesBtn.addEventListener('click', () => {
     stepQuestion.style.display = 'none';
     noBtn.style.display = 'none';
+    stepTiktok.style.display = 'block'; // Afișează ecranul „You said yes”
+});
+
+tiktokNextBtn.addEventListener('click', () => {
+    stepTiktok.style.display = 'none';
     datePanel.style.display = 'block';
 });
 
