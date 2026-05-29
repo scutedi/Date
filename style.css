@@ -108,6 +108,7 @@ h1 {
     color: #d13b66;
     margin-bottom: 35px;
     font-size: 46px;
+    font-weight: 800 !important;
 }
 
 /* --- SISTEM STELUȚE --- */
@@ -170,7 +171,7 @@ button:hover:not(:disabled) {
     color: white !important;
     border: none !important;
     padding: 14px 40px !important;
-    font-size: 30px !important;
+    font-size: 22px;
     font-weight: bold !important;
     border-radius: 50px !important; /* Îl face perfect rotund la margini */
     cursor: pointer !important;
@@ -178,7 +179,7 @@ button:hover:not(:disabled) {
     transition: all 0.2s ease !important;
     display: inline-block !important;
     margin-top: 15px;
-    width: auto !important; /* Nu lasă butonul să se întindă pe tot ecranul */
+    width: auto; /* Nu lasă butonul să se întindă pe tot ecranul */
 }
 
 #next-btn:hover {
@@ -234,7 +235,7 @@ button:disabled {
     color: white !important;
     border: none !important;
     padding: 14px 40px !important;
-    font-size: 22px !important;
+    font-size: 22px;
     font-weight: bold !important;
     border-radius: 50px !important; /* Îl face perfect rotund la margini */
     cursor: pointer !important;
@@ -242,7 +243,7 @@ button:disabled {
     transition: all 0.2s ease !important;
     display: inline-block !important;
     margin-top: 15px;
-    width: auto !important; /* Nu lasă butonul să se întindă pe tot ecranul */
+    width: auto; /* Nu lasă butonul să se întindă pe tot ecranul */
 }
 
 #confirm-btn:hover {
@@ -558,6 +559,7 @@ span.flatpickr-weekday { color: #ff7ea5 !important; font-weight: bold !important
     }
 
     #next-btn, #confirm-btn {
+        font-size: 18px;
         width: 50%;
     }
 
